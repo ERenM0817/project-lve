@@ -6,86 +6,50 @@
       name="viewport"
       content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover"
     />
-    <title>Blooming Bouquet</title>
-    <link rel="stylesheet" href="style.css" />
+    <title>Blooming Rose – Valentine</title>
+    <link rel="stylesheet" href="rose.css" />
   </head>
   <body>
     <div class="app">
-      <div class="light-rays"></div>
+      <div class="night-sky"></div>
       <div class="scene">
         <div class="valentine-header">
           <div class="valentine-title">will you be my valentine?</div>
-          <div class="valentine-subtitle">a bouquet just for you</div>
+          <div class="valentine-subtitle">a blooming rose just for you</div>
         </div>
 
-        <div class="bouquet" id="bouquet">
-          <!-- Bouquet item 1: red rose -->
-          <div class="bouquet-item item-1">
-            <div class="stem stem-1"></div>
-            <div class="leaf leaf-1"></div>
-            <div class="flower flower-rose-red">
-              <div class="flower-core"></div>
-              <div class="petal-ring">
-                <span></span><span></span><span></span><span></span><span></span>
-              </div>
-            </div>
-          </div>
+        <div class="rose-wrapper">
+          <div class="light-orbit"></div>
+          <div class="rose" id="rose">
+            <div class="stem"></div>
+            <div class="leaf leaf-left"></div>
+            <div class="leaf leaf-right"></div>
 
-          <!-- Bouquet item 2: red tulip -->
-          <div class="bouquet-item item-2">
-            <div class="stem stem-2"></div>
-            <div class="leaf leaf-2"></div>
-            <div class="flower flower-tulip-red">
-              <div class="tulip-bud">
-                <span class="tulip-petal left"></span>
-                <span class="tulip-petal center"></span>
-                <span class="tulip-petal right"></span>
-              </div>
-            </div>
-          </div>
+            <div class="rose-glow"></div>
 
-          <!-- Bouquet item 3: light pink rose -->
-          <div class="bouquet-item item-3">
-            <div class="stem stem-3"></div>
-            <div class="leaf leaf-3"></div>
-            <div class="flower flower-rose-pink">
-              <div class="flower-core"></div>
-              <div class="petal-ring">
-                <span></span><span></span><span></span><span></span><span></span>
-              </div>
-            </div>
-          </div>
+            <div class="rose-center"></div>
 
-          <!-- Bouquet item 4: light pink tulip -->
-          <div class="bouquet-item item-4">
-            <div class="stem stem-4"></div>
-            <div class="leaf leaf-4"></div>
-            <div class="flower flower-tulip-pink">
-              <div class="tulip-bud">
-                <span class="tulip-petal left"></span>
-                <span class="tulip-petal center"></span>
-                <span class="tulip-petal right"></span>
-              </div>
-            </div>
-          </div>
+            <div class="petal petal-inner petal-1"></div>
+            <div class="petal petal-inner petal-2"></div>
+            <div class="petal petal-inner petal-3"></div>
 
-          <!-- Bouquet wrap & ribbon -->
-          <div class="wrap">
-            <div class="wrap-fold left"></div>
-            <div class="wrap-fold right"></div>
-            <div class="wrap-center"></div>
-            <div class="ribbon">
-              <div class="ribbon-knot"></div>
-              <div class="ribbon-tail left"></div>
-              <div class="ribbon-tail right"></div>
-            </div>
+            <div class="petal petal-mid petal-4"></div>
+            <div class="petal petal-mid petal-5"></div>
+            <div class="petal petal-mid petal-6"></div>
+            <div class="petal petal-mid petal-7"></div>
+
+            <div class="petal petal-outer petal-8"></div>
+            <div class="petal petal-outer petal-9"></div>
+            <div class="petal petal-outer petal-10"></div>
+            <div class="petal petal-outer petal-11"></div>
           </div>
         </div>
-        <div class="hint" id="hint">Tap to bloom</div>
+
+        <div class="hint" id="hint">Tap the rose to bloom</div>
       </div>
     </div>
 
-    <script src="script.js"></script>
+    <script src="rose.js"></script>
   </body>
 </html>
 
