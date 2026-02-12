@@ -1,0 +1,734 @@
+:root {
+  --bg-dark: radial-gradient(
+    circle at top,
+    #2d2238 0%,
+    #191526 40%,
+    #120f1e 70%,
+    #0b0915 100%
+  );
+  --bg-light: radial-gradient(
+    circle at top,
+    #ffe1ee 0%,
+    #ffeaf6 30%,
+    #ffe4f4 55%,
+    #ffd4ec 80%,
+    #f6d4ff 100%
+  );
+  --light-rays: conic-gradient(
+    from -90deg,
+    rgba(255, 255, 255, 0),
+    rgba(255, 240, 245, 0.16),
+    rgba(255, 220, 230, 0.26),
+    rgba(255, 255, 255, 0)
+  );
+  --rose-red: #ff2b4f;
+  --rose-red-deep: #b30024;
+  --rose-pink: #ff9ebc;
+  --rose-pink-deep: #ff5a8a;
+  --tulip-red: #ff3645;
+  --tulip-pink: #ffc1da;
+  --stem: #1f8c54;
+  --leaf: #2aa865;
+  --wrap-outer: #f7cada;
+  --wrap-inner: #ffd8e6;
+  --wrap-shadow: rgba(90, 36, 61, 0.5);
+  --ribbon: #ff4b6e;
+  --ribbon-dark: #d3264f;
+  --transition-duration: 1.35s;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+  background: #0e0917;
+  color: #f8fafc;
+}
+
+.app {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  overflow: hidden;
+  background: var(--bg-dark);
+  transition: background var(--transition-duration) ease;
+}
+
+.app.bloomed {
+  background: var(--bg-light);
+}
+
+/* Ensure good fit on tall iPhones and 20:9 Android screens */
+.scene {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  aspect-ratio: 9 / 16;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 9vh 1.6rem 3.6rem;
+}
+
+@media (min-width: 768px) {
+  .scene {
+    max-width: 520px;
+    aspect-ratio: 9 / 19.5;
+    padding-top: 8vh;
+  }
+}
+
+.light-rays {
+  pointer-events: none;
+  position: absolute;
+  inset: -22%;
+  background: none;
+  mix-blend-mode: screen;
+  opacity: 0;
+  transform-origin: 50% 0%;
+  transform: translateY(-8%) scale(1.1);
+  transition:
+    opacity var(--transition-duration) ease,
+    filter var(--transition-duration) ease,
+    transform var(--transition-duration) ease;
+  z-index: 0;
+}
+
+.app.blooming .light-rays,
+.app.bloomed .light-rays {
+  background-image: var(--light-rays);
+}
+
+.app.blooming .light-rays {
+  opacity: 0.4;
+  filter: blur(12px) brightness(1.02);
+}
+
+.app.bloomed .light-rays {
+  opacity: 0.6;
+  filter: blur(10px) brightness(1.05);
+  transform: translateY(-10%) scale(1.05);
+}
+
+.bouquet {
+  position: relative;
+  width: 60vw;
+  max-width: 280px;
+  aspect-ratio: 3 / 4;
+  cursor: pointer;
+  transform-origin: center bottom;
+  transform: translateY(16px) scale(0.96);
+  transition:
+    transform var(--transition-duration) cubic-bezier(0.16, 1, 0.3, 1),
+    filter var(--transition-duration) ease;
+  filter: brightness(0.7) saturate(0.9);
+  z-index: 1;
+}
+
+@media (min-width: 768px) {
+  .bouquet {
+    width: 42vw;
+    max-width: 280px;
+  }
+}
+
+.app.blooming .bouquet {
+  transform: translateY(6px) scale(1.02);
+  filter: brightness(0.9) saturate(1.05);
+}
+
+.app.bloomed .bouquet {
+  transform: translateY(0) scale(1.06);
+  filter: brightness(1.05) saturate(1.2);
+}
+
+/* Individual bouquet items so each stem/leaf/flower can be adjusted independently */
+.bouquet-item {
+  position: absolute;
+  bottom: 10%;
+  width: 80px;
+  height: 75%;
+  transform-origin: bottom center;
+}
+
+.bouquet-item.item-1 {
+  left: 30%;
+  transform: translateX(-50%);
+}
+
+.bouquet-item.item-2 {
+  left: 44%;
+  transform: translateX(-50%);
+}
+
+.bouquet-item.item-3 {
+  left: 60%;
+  transform: translateX(-50%);
+}
+
+.bouquet-item.item-4 {
+  left: 74%;
+  transform: translateX(-50%);
+}
+
+.stem {
+  position: absolute;
+  bottom: 0;
+  width: 8px;
+  border-radius: 999px;
+  background: linear-gradient(to bottom, #66d89e, var(--stem));
+  transform-origin: bottom center;
+  transition:
+    transform var(--transition-duration) cubic-bezier(0.16, 1, 0.3, 1),
+    filter var(--transition-duration) ease;
+}
+
+.stem-1 {
+  left: 50%;
+  height: 86%;
+  transform: translateX(-50%) rotate(-8deg);
+}
+
+.stem-2 {
+  left: 50%;
+  height: 82%;
+  transform: translateX(-50%) rotate(-2deg);
+}
+
+.stem-3 {
+  left: 50%;
+  height: 84%;
+  transform: translateX(-50%) rotate(7deg);
+}
+
+.stem-4 {
+  left: 50%;
+  height: 80%;
+  transform: translateX(-50%) rotate(-11deg);
+}
+
+.app.bloomed .stem-1 {
+  transform: translateX(-60%) rotate(-15deg);
+}
+.app.bloomed .stem-2 {
+  transform: translateX(-52%) rotate(-5deg);
+}
+.app.bloomed .stem-3 {
+  transform: translateX(-40%) rotate(11deg);
+}
+.app.bloomed .stem-4 {
+  transform: translateX(-60%) rotate(-18deg);
+}
+
+.flower {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  transform-origin: center center;
+  transition:
+    transform var(--transition-duration) cubic-bezier(0.16, 1, 0.3, 1),
+    opacity var(--transition-duration) ease,
+    filter var(--transition-duration) ease;
+  opacity: 0.9;
+}
+
+.flower-rose-red {
+  bottom: 56%;
+  left: 50%;
+  transform: translate(-50%, 40%) scale(0.74);
+}
+
+.flower-rose-pink {
+  bottom: 58%;
+  left: 50%;
+  transform: translate(-50%, 38%) scale(0.72);
+}
+
+.flower-tulip-red {
+  bottom: 50%;
+  left: 50%;
+  transform: translate(-50%, 42%) scale(0.64);
+}
+
+.flower-tulip-pink {
+  bottom: 50%;
+  left: 50%;
+  transform: translate(-50%, 36%) scale(0.6);
+}
+
+.app.bloomed .flower-rose-red {
+  transform: translate(-50%, 10%) scale(1.02);
+}
+.app.bloomed .flower-rose-pink {
+  transform: translate(-50%, 4%) scale(0.98);
+}
+.app.bloomed .flower-tulip-red {
+  transform: translate(-50%, 4%) scale(0.94);
+}
+.app.bloomed .flower-tulip-pink {
+  transform: translate(-50%, 0%) scale(0.9);
+}
+
+.flower-core {
+  position: absolute;
+  inset: 28%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #ffe4b8, #ffc66a 35%, #f4982b 60%, #a64b1d);
+  box-shadow:
+    0 0 10px rgba(255, 216, 130, 0.5),
+    0 0 20px rgba(255, 190, 92, 0.3);
+}
+
+.petal-ring {
+  position: absolute;
+  inset: 0;
+}
+
+.petal-ring span {
+  position: absolute;
+  width: 46%;
+  height: 46%;
+  border-radius: 60% 80% 60% 80%;
+  transform-origin: 100% 100%;
+  filter: drop-shadow(0 6px 7px rgba(0, 0, 0, 0.35));
+  opacity: 0.4;
+  transform: scale(0.3);
+  transition:
+    transform var(--transition-duration) cubic-bezier(0.18, 0.7, 0.25, 1.2),
+    opacity var(--transition-duration) ease,
+    background var(--transition-duration) ease;
+  transition-delay: 0s;
+}
+
+/* Red rose petals */
+.flower-rose-red .petal-ring span {
+  background: radial-gradient(circle at 30% 20%, #ff878f, var(--rose-red));
+}
+
+/* Light pink rose petals */
+.flower-rose-pink .petal-ring span {
+  background: radial-gradient(circle at 30% 20%, #ffe0f0, var(--rose-pink));
+}
+
+.petal-ring span:nth-child(1) {
+  top: 6%;
+  left: 22%;
+}
+.petal-ring span:nth-child(2) {
+  top: 26%;
+  right: 0;
+  transform-origin: 0 100%;
+}
+.petal-ring span:nth-child(3) {
+  bottom: 10%;
+  left: 28%;
+  transform-origin: 70% 0%;
+}
+.petal-ring span:nth-child(4) {
+  top: 26%;
+  left: 0;
+  transform-origin: 100% 100%;
+}
+.petal-ring span:nth-child(5) {
+  top: 38%;
+  left: 36%;
+  transform-origin: 50% 100%;
+}
+
+.app.blooming .petal-ring span,
+.app.bloomed .petal-ring span {
+  opacity: 1;
+}
+
+.app.blooming .flower-rose-red .petal-ring span:nth-child(1),
+.app.bloomed .flower-rose-red .petal-ring span:nth-child(1) {
+  transform: translate(-6px, -4px) rotate(-12deg) scale(1.05);
+  transition-delay: 0.05s;
+}
+.app.blooming .flower-rose-red .petal-ring span:nth-child(2),
+.app.bloomed .flower-rose-red .petal-ring span:nth-child(2) {
+  transform: translate(4px, -2px) rotate(24deg) scale(1.03);
+  transition-delay: 0.12s;
+}
+.app.blooming .flower-rose-red .petal-ring span:nth-child(3),
+.app.bloomed .flower-rose-red .petal-ring span:nth-child(3) {
+  transform: translate(-4px, 8px) rotate(18deg) scale(1.07);
+  transition-delay: 0.18s;
+}
+.app.blooming .flower-rose-red .petal-ring span:nth-child(4),
+.app.bloomed .flower-rose-red .petal-ring span:nth-child(4) {
+  transform: translate(-8px, 0) rotate(-24deg) scale(1.03);
+  transition-delay: 0.24s;
+}
+.app.blooming .flower-rose-red .petal-ring span:nth-child(5),
+.app.bloomed .flower-rose-red .petal-ring span:nth-child(5) {
+  transform: translate(-2px, 4px) scale(1.1);
+  transition-delay: 0.3s;
+}
+
+.app.blooming .flower-rose-pink .petal-ring span:nth-child(1),
+.app.bloomed .flower-rose-pink .petal-ring span:nth-child(1) {
+  transform: translate(-4px, -6px) rotate(-8deg) scale(0.98);
+  transition-delay: 0.26s;
+}
+.app.blooming .flower-rose-pink .petal-ring span:nth-child(2),
+.app.bloomed .flower-rose-pink .petal-ring span:nth-child(2) {
+  transform: translate(6px, -6px) rotate(18deg) scale(0.98);
+  transition-delay: 0.32s;
+}
+.app.blooming .flower-rose-pink .petal-ring span:nth-child(3),
+.app.bloomed .flower-rose-pink .petal-ring span:nth-child(3) {
+  transform: translate(-4px, 10px) rotate(16deg) scale(1.02);
+  transition-delay: 0.38s;
+}
+.app.blooming .flower-rose-pink .petal-ring span:nth-child(4),
+.app.bloomed .flower-rose-pink .petal-ring span:nth-child(4) {
+  transform: translate(-10px, -2px) rotate(-18deg) scale(0.96);
+  transition-delay: 0.44s;
+}
+.app.blooming .flower-rose-pink .petal-ring span:nth-child(5),
+.app.bloomed .flower-rose-pink .petal-ring span:nth-child(5) {
+  transform: translate(-2px, 4px) scale(1.02);
+  transition-delay: 0.5s;
+}
+
+/* Tulip shapes */
+.tulip-bud {
+  position: absolute;
+  inset: 10% 18% 12%;
+  filter: drop-shadow(0 6px 7px rgba(0, 0, 0, 0.35));
+}
+
+.tulip-petal {
+  position: absolute;
+  bottom: 0;
+  width: 42%;
+  height: 100%;
+  border-radius: 60% 60% 20% 20%;
+  transform-origin: bottom center;
+  opacity: 0;
+  transform: scaleY(0.1);
+  transition:
+    transform var(--transition-duration) cubic-bezier(0.2, 0.7, 0.3, 1.25),
+    opacity var(--transition-duration) ease,
+    background var(--transition-duration) ease;
+}
+
+.flower-tulip-red .tulip-petal {
+  background: linear-gradient(to top, #c01227, var(--tulip-red));
+}
+
+.flower-tulip-pink .tulip-petal {
+  background: linear-gradient(to top, #ff86b6, var(--tulip-pink));
+}
+
+.tulip-petal.left {
+  left: 0;
+  border-radius: 70% 30% 20% 40%;
+}
+.tulip-petal.center {
+  left: 29%;
+  width: 42%;
+  border-radius: 60% 60% 10% 10%;
+}
+.tulip-petal.right {
+  right: 0;
+  border-radius: 30% 70% 40% 20%;
+}
+
+.app.blooming .tulip-petal,
+.app.bloomed .tulip-petal {
+  opacity: 1;
+}
+
+.app.blooming .tulip-petal.left,
+.app.bloomed .tulip-petal.left {
+  transform: rotate(-12deg) scaleY(1);
+  transition-delay: 0.22s;
+}
+.app.blooming .tulip-petal.center,
+.app.bloomed .tulip-petal.center {
+  transform: scaleY(1.04);
+  transition-delay: 0.28s;
+}
+.app.blooming .tulip-petal.right,
+.app.bloomed .tulip-petal.right {
+  transform: rotate(12deg) scaleY(1);
+  transition-delay: 0.34s;
+}
+
+/* Leaves – one for each stem (now per bouquet item) */
+.leaf {
+  position: absolute;
+  bottom: 22%;
+  left: 50%;
+  width: 48px;
+  height: 76px;
+  background: radial-gradient(circle at 20% 20%, #82f2b1, var(--leaf));
+  border-radius: 0 100% 40% 100%;
+  transform-origin: bottom center;
+  opacity: 0;
+  transform: translateX(-50%) scale(0.45) rotate(0deg);
+  filter: drop-shadow(0 6px 7px rgba(0, 0, 0, 0.4));
+  transition:
+    opacity var(--transition-duration) ease,
+    transform var(--transition-duration) cubic-bezier(0.2, 0.7, 0.3, 1.2);
+}
+
+.leaf-1 {
+  transform-origin: bottom right;
+}
+
+.leaf-2 {
+  transform-origin: bottom left;
+}
+
+.leaf-3 {
+  transform-origin: bottom left;
+}
+
+.leaf-4 {
+  transform-origin: bottom right;
+}
+
+.app.blooming .leaf,
+.app.bloomed .leaf {
+  opacity: 1;
+}
+
+.app.blooming .leaf-1,
+.app.bloomed .leaf-1 {
+  transform: translateX(-50%) scale(1) rotate(-30deg);
+  transition-delay: 0.18s;
+}
+.app.blooming .leaf-2,
+.app.bloomed .leaf-2 {
+  transform: translateX(-50%) scale(1) rotate(18deg);
+  transition-delay: 0.24s;
+}
+.app.blooming .leaf-3,
+.app.bloomed .leaf-3 {
+  transform: translateX(-50%) scale(1) rotate(26deg);
+  transition-delay: 0.3s;
+}
+.app.blooming .leaf-4,
+.app.bloomed .leaf-4 {
+  transform: translateX(-50%) scale(1) rotate(-22deg);
+  transition-delay: 0.36s;
+}
+
+/* Gentle one-time sway inspired by “Magical Night” demo */
+@keyframes bouquet-sway-once {
+  0% {
+    transform: translateY(16px) scale(0.9) rotate(0deg);
+  }
+  40% {
+    transform: translateY(10px) scale(1.02) rotate(-1deg);
+  }
+  80% {
+    transform: translateY(4px) scale(1.04) rotate(0.6deg);
+  }
+  100% {
+    transform: translateY(6px) scale(1.02) rotate(0deg);
+  }
+}
+
+.app.blooming .bouquet {
+  animation: bouquet-sway-once 1.5s ease-out forwards;
+}
+
+/* Bouquet wrap & ribbon (instead of pot) */
+.wrap {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 58%;
+  height: 30%;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.wrap-fold {
+  position: absolute;
+  bottom: 10%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(135deg, var(--wrap-outer), var(--wrap-inner));
+  box-shadow: 0 16px 28px var(--wrap-shadow);
+}
+
+.wrap-fold.left {
+  left: 0;
+  border-radius: 40% 0 60% 10%;
+  transform-origin: bottom right;
+  transform: skewX(-8deg);
+}
+
+.wrap-fold.right {
+  right: 0;
+  border-radius: 0 40% 10% 60%;
+  transform-origin: bottom left;
+  transform: skewX(8deg);
+}
+
+.wrap-center {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 48%;
+  height: 100%;
+  transform: translateX(-50%);
+  background: linear-gradient(180deg, var(--wrap-inner), var(--wrap-outer));
+  border-radius: 45% 45% 18px 18px;
+  box-shadow:
+    0 18px 34px var(--wrap-shadow),
+    0 0 18px rgba(255, 255, 255, 0.28) inset;
+}
+
+.ribbon {
+  position: absolute;
+  bottom: 18%;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ribbon-knot {
+  width: 34px;
+  height: 22px;
+  background: radial-gradient(circle at 30% 20%, #ffb0c4, var(--ribbon));
+  border-radius: 999px;
+  box-shadow:
+    0 4px 8px rgba(150, 28, 60, 0.6),
+    0 0 6px rgba(255, 122, 154, 0.8);
+}
+
+.ribbon-tail {
+  position: absolute;
+  top: 50%;
+  width: 22px;
+  height: 40px;
+  background: linear-gradient(180deg, var(--ribbon), var(--ribbon-dark));
+  transform-origin: top center;
+  clip-path: polygon(0 0, 100% 0, 100% 70%, 50% 100%, 0 70%);
+}
+
+.ribbon-tail.left {
+  right: 52%;
+  transform: translateX(-4px) rotate(-18deg);
+}
+
+.ribbon-tail.right {
+  left: 52%;
+  transform: translateX(4px) rotate(18deg);
+}
+
+.hint {
+  position: absolute;
+  bottom: 7%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.9rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: rgba(255, 245, 250, 0.72);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+  opacity: 0.9;
+  animation: hint-pulse 1.5s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+.app.bloomed .hint {
+  opacity: 0;
+  animation: none;
+}
+
+@keyframes hint-pulse {
+  from {
+    transform: translateX(-50%) translateY(0);
+    opacity: 0.5;
+  }
+  to {
+    transform: translateX(-50%) translateY(-4px);
+    opacity: 0.9;
+  }
+}
+
+/* Fallback for the slight dark initial view */
+body.initial-dark {
+  background: #12091b;
+}
+
+/* Valentine header & romantic accents */
+.valentine-header {
+  position: relative;
+  text-align: center;
+  margin-bottom: 1.7rem;
+  color: #6b253a;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+  z-index: 1;
+  opacity: 0;
+  transform: translateY(-8px);
+  transition:
+    opacity 0.8s ease,
+    transform 0.8s ease;
+}
+
+.valentine-title {
+  font-family: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 700;
+  font-size: 1.4rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.valentine-subtitle {
+  margin-top: 0.3rem;
+  font-size: 0.9rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.85;
+}
+
+.valentine-header::before,
+.valentine-header::after {
+  content: "♥";
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.95rem;
+  color: #ff9ab9;
+  opacity: 0.85;
+}
+
+.valentine-header::before {
+  left: 6%;
+}
+
+.valentine-header::after {
+  right: 6%;
+}
+
+.valentine-header.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (min-width: 480px) {
+  .valentine-title {
+    font-size: 1.6rem;
+  }
+}
+
